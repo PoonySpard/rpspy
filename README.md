@@ -7,6 +7,6 @@ To play Rock, Paper, Scissors: run playrps.py as `__main__`.
 
 To play Rock, Paper, Scissors, Lizard, Spock: run customrps.y as `__main__`.
 
-See docstrings inside modules for detailed instructions for use.
+See docstrings inside modules for detailed instructions for use, especially rps.py for base game and customrps.py for creating variations.
 
 Please excuse the camelCase and double quotes, they're required by the class I wrote this for.
