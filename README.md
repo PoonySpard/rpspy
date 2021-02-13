@@ -15,10 +15,9 @@ constants.py
 playrps.py
     execute as `__main__` to play Rock, Paper, Scissors in console.    
 customrps.py
-    contains a subclass that allows initializing RockPaperScissors with kwargs
-        to create a derivative game
-    contains an example of CustomRockPaperScissors, RockPaperScissorsLizardSpock.
-        execute as `__main__` to play Rock, Paper, Scissors, Lizard, Spock in console.
+    contains a subclass, CustomRockPaperScissors, that allows initializing RockPaperScissors with kwargs to create a derivative game
+    contains an example of CustomRockPaperScissors, RockPaperScissorsLizardSpock. 
+        Execute as `__main__` to play Rock, Paper, Scissors, Lizard, Spock in console.
 ```
 
 
