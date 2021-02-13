@@ -3,7 +3,8 @@ The ultimate Rock Paper Scissors package, an extremely overbuilt Computer Scienc
 
 Requires Python 3.7+ (3.6+ CPython) for proper functionality
 
-```Files
+```
+Files
 -------
 __init__.py
     contains the same information as this readme
