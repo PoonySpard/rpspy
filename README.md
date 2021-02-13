@@ -7,12 +7,16 @@ Files
 -------
 `__init__`.py
     contains the same information as this readme
+    
 rps.py
     primary module, contains RockPaperScissors and GameSequenceError classes
+    
 constants.py
     contains Moves constant Enum for rps.py
+    
 playrps.py
     execute as `__main__` to play Rock, Paper, Scissors in console.
+    
 customrps.py
     contains a subclass that allows initializing RockPaperScissors with kwargs
         to create a derivative game
