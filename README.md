@@ -7,11 +7,11 @@ Requires Python 3.7+ (3.6+ CPython) for proper functionality
 Files
 -------
 __init__.py
-    Contains the same information as this readme
+    Contains the same information as this readme.
 rps.py
-    Primary module, contains RockPaperScissors and GameSequenceError classes
+    Primary module, contains RockPaperScissors and GameSequenceError classes.
 constants.py
-    Contains Moves constant Enum for rps.py
+    Contains Moves constant Enum for rps.py.
 playrps.py
     Execute as `__main__` to play Rock, Paper, Scissors in console.    
 customrps.py
