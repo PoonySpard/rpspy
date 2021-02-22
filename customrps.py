@@ -64,6 +64,7 @@ class CustomRockPaperScissors(RockPaperScissors):
         """Initializes as normal, but calls buildNewMoves to change class attributes if kwargs are used."""
         super().__init__()
         if kwargs:
+            self.oldMoveNames = [move.name.upper() for move in self.Moves]
             self.buildNewMoves(**kwargs)
             self.newClass()
 
@@ -74,9 +75,8 @@ class CustomRockPaperScissors(RockPaperScissors):
 
     def buildNewMoves(self, **kwargs):
         """Redefines class attributes according to kwargs to create a new game."""
-        oldMoveNames = [move.name.upper() for move in self.Moves]
-        upperKwargs = self.upKwargs(oldMoveNames, **kwargs)
-        oldMoveKwargs = self.processOldMoves(oldMoveNames, upperKwargs)
+        upperKwargs = self.upKwargs(**kwargs)
+        oldMoveKwargs = self.processOldMoves(upperKwargs)
         self.Moves = Enum("Moves", " ".join(oldMoveKwargs.keys()))
         enumKwargs = self.oldMoveKwargsToEnums(oldMoveKwargs)
         self.moveStrings = {}
@@ -91,12 +91,12 @@ class CustomRockPaperScissors(RockPaperScissors):
             self.processLosesTo(move, moveDict)
             self.processVerbs(move, moveDict)
 
-    def upKwargs(self, oldMoveNames, **kwargs):
-        """Takes oldMoveNames, kwargs, returns uppercase-keyed desired changes without undesired moves."""
+    def upKwargs(self, **kwargs):
+        """Takes self.oldMoveNames, kwargs, returns uppercase-keyed desired changes without undesired moves."""
         upperKwargs = {}
         for moveAtt, moveDict in kwargs.items():
-            if type(moveDict) is not dict and moveAtt.upper() in oldMoveNames:
-                oldMoveNames.remove(moveAtt.upper())
+            if type(moveDict) is not dict and moveAtt.upper() in self.oldMoveNames:
+                self.oldMoveNames.remove(moveAtt.upper())
             else:
                 moveDictUpper = moveDict
                 try:
@@ -114,12 +114,12 @@ class CustomRockPaperScissors(RockPaperScissors):
                 upperKwargs[moveAtt.upper()] = moveDictUpper
         return upperKwargs
 
-    def processOldMoves(self, oldMoveNames, upperKwargs):
+    def processOldMoves(self, upperKwargs):
         """Returns all desired old moves with any missing properties in upperKwargs
 
         Doesn't overwrite any custom properties for old moves.
         """
-        for oldName in oldMoveNames:
+        for oldName in self.oldMoveNames:
             if oldName not in upperKwargs:
                 upperKwargs[oldName] = {}
             moveDict = upperKwargs[oldName]
