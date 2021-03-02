@@ -1,5 +1,5 @@
 # rpspy
-The ultimate Rock Paper Scissors package, an extremely overbuilt Computer Science 1 assignment.
+The ultimate Rock Paper Scissors package, an extremely overbuilt class assignment.
 
 Requires Python 3.7+ (3.6+ CPython) for proper functionality
 
