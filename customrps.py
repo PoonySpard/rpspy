@@ -84,8 +84,8 @@ class CustomRockPaperScissors(RockPaperScissors):
         self.hierarchy = {}
         self.verbs = {}
         for move, moveDict in enumKwargs.items():
-            self.moveStrings[move] = moveDict["string"] if "string" in moveDict else move.name.lower()
-            moveInput = moveDict["inputString"] if "inputString" in moveDict else move.name[0].upper()
+            self.moveStrings[move] = moveDict.get("string", move.name.lower())
+            moveInput = moveDict.get("inputString", move.name[0].upper())
             self.moveInputs[moveInput] = move
             self.processBeats(move, moveDict)
             self.processLosesTo(move, moveDict)
@@ -95,7 +95,7 @@ class CustomRockPaperScissors(RockPaperScissors):
         """Takes self.oldMoveNames, kwargs, returns uppercase-keyed desired changes without undesired moves."""
         upperKwargs = {}
         for moveAtt, moveDict in kwargs.items():
-            if type(moveDict) is not dict and moveAtt.upper() in self.oldMoveNames:
+            if not isinstance(moveDict, dict) and moveAtt.upper() in self.oldMoveNames:
                 self.oldMoveNames.remove(moveAtt.upper())
             else:
                 moveDictUpper = moveDict
@@ -150,11 +150,8 @@ class CustomRockPaperScissors(RockPaperScissors):
         """Returns values to avoid overwriting when redefining keys "beats" or "losesTo"""
         avoidOverwrite = []
         for moveAtt, moveDict in upperKwargs.items():
-            try:
-                if oldName in [moveName for moveName, verb in moveDict[key]]:
-                    avoidOverwrite.append(moveAtt)
-            except KeyError:
-                pass
+            if oldName in [moveName for moveName, verb in moveDict.get(key, [])]:
+                avoidOverwrite.append(moveAtt)
         return avoidOverwrite
 
     def oldMoveKwargsToEnums(self, oldMoveKwargs):
@@ -203,10 +200,8 @@ class CustomRockPaperScissors(RockPaperScissors):
     def processVerbs(self, move, moveDict):
         """Processes verbs from beats and LosesTo and adds relevant moves to verbs"""
         verbs = []
-        if "beats" in moveDict:
-            verbs += [((move, loser), verb) for loser, verb in moveDict["beats"]]
-        if "losesTo" in moveDict:
-            verbs += [((winner, move), verb) for winner, verb in moveDict["losesTo"]]
+        verbs += [((move, loser), verb) for loser, verb in moveDict.get("beats", [])]
+        verbs += [((winner, move), verb) for winner, verb in moveDict.get("losesTo", [])]
         for moves, verb in verbs:
             self.verbs[moves] = verb
 
