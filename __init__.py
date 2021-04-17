@@ -1,4 +1,4 @@
-"""The ultimate Rock, Paper, Scissors package. By Ryan Laursen.
+"""The ultimate Rock, Paper, Scissors package. By Spoony Bard.
 
 Please excuse the camelCase and double quotes, they're required by the class.
 
